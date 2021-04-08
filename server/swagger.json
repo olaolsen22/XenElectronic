@@ -1,0 +1,224 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "XenElectronic API",
+    "version": "1.0.0",
+    "title": "XenElectronic",
+    "contact": {
+      "email": "olaolsen22@gmail.com"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Products"
+    },
+    {
+      "name": "Shopping Cart"
+    },
+    {
+      "name": "Others"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Others"
+        ],
+        "summary": "Server Healthcheck",
+        "description": "Verify if the server is up and running",
+        "operationId": "healthcheck",
+        "responses": {
+          "200": {
+            "description": "Server is up and running"
+          }
+        }
+      }
+    },
+    "/shopping-cart/remove/{productId}": {
+      "put": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "Remove product from cart",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "operationId": "removeProductFromCart",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/shoppingCartProducts"
+              }
+            },
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/shopping-cart": {
+      "get": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "Get all products inside shopping cart",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getShoppingCartProducts",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/shoppingCartProducts"
+              }
+            },
+            "description": "Successful operation"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "Add new product to cart",
+        "operationId": "addProductToCart",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Rider object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/shoppingCartProducts"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added product to shopping cart"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get all/filtered products by category e.g. mobile, television, appliance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "categoryFilter",
+            "in": "query",
+            "description": "Categories available for filtering",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "all",
+                "mobile",
+                "television",
+                "appliance"
+              ],
+              "default": "all"
+            }
+          }
+        ],
+        "operationId": "getProductsByCategory",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/products"
+              }
+            },
+            "description": "Success!"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "products": {
+      "type": "object",
+      "required": [
+        "productName",
+        "productImageLink",
+        "productCategory"
+      ],
+      "properties": {
+        "productId": {
+          "type": "integer",
+          "example": 1
+        },
+        "productName": {
+          "type": "string",
+          "example": "OnePlus 9 Pro"
+        },
+        "productImageLink": {
+          "type": "string",
+          "example": "https://www.giztop.com/media/catalog/product/cache/dc206057cdd42d7e34b9d36e347785ca/o/n/oneplus_9_pro-1.png"
+        },
+        "productCategory": {
+          "type": "string",
+          "example": "mobile"
+        },
+        "productPrice": {
+          "type": "integer",
+          "example": "39,999.90"
+        },
+        "dateModified": {
+          "type": "string",
+          "example": "2021-04-08 15:00:00"
+        }
+      }
+    },
+    "shoppingCartProducts": {
+      "type": "object",
+      "required": [
+        "productId",
+        "inCart"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "productId": {
+          "type": "integer",
+          "example": 1
+        },
+        "isActivePurchase": {
+          "type": "boolean",
+          "example": true
+        },
+        "dateModified": {
+          "type": "string",
+          "example": "2021-04-08 15:00:00"
+        }
+      }
+    }
+  }
+}
