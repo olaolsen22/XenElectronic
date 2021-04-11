@@ -37,21 +37,75 @@
         }
       }
     },
-    "/shopping-cart/remove/{productId}": {
+    "/shopping-cart/update-product/": {
       "put": {
         "tags": [
           "Shopping Cart"
         ],
-        "summary": "Remove product from cart",
+        "summary": "Update product from cart",
         "parameters": [
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "in": "body",
+            "name": "shoppingCartProduct",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "status"
+              ],
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
-        "operationId": "removeProductFromCart",
+        "operationId": "updateProductFromCart",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/shoppingCartProducts"
+              }
+            },
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/shopping-cart/update-multuple-products/": {
+      "put": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "Update product from cart",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "shoppingCartProduct",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "status"
+              ],
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "updateMultipleProductsFromCart",
         "responses": {
           "200": {
             "schema": {
@@ -210,9 +264,9 @@
           "type": "integer",
           "example": 1
         },
-        "isActivePurchase": {
+        "status": {
           "type": "boolean",
-          "example": true
+          "example": "ACTIVE"
         },
         "dateModified": {
           "type": "string",
