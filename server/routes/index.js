@@ -21,7 +21,7 @@ exports.products = function(req, res) {
 	var collection = db.collection('products');
 	var productCategory = req.query.productCategory;
 	collection.find(
-		{ 'productCategory': productCategory}
+		{ 'productCategory': productCategory }
 	).toArray(function(err, productsArray) {
 		if (productsArray) {
 			res.json(productsArray);

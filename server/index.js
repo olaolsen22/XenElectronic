@@ -43,6 +43,8 @@ app.post('/shopping-cart', routes.addToShoppingCart);
 app.put('/shopping-cart/update-product', routes.updateShoppingCart);
 app.put('/shopping-cart/update-multiple-products', routes.updateMultipleProducts);
 
-app.listen(port, () => {
-  console.log(`XenElectric API listening at http://localhost:${port}`)
+const server = app.listen(port, () => {
+	console.log(`XenElectric API listening at http://localhost:${port}`)
 })
+
+module.exports = server
