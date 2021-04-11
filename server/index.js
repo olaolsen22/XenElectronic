@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Routes
+app.get('/health', routes.healthCheck)
 app.get('/products', routes.products);
 app.get('/shopping-cart', routes.shoppingCart);
 app.post('/shopping-cart', routes.addToShoppingCart);
