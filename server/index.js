@@ -2,7 +2,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = 4000;
 var routes = require('./routes');
 
 const swaggerUI = require('swagger-ui-express');
@@ -40,6 +40,7 @@ app.get('/products', routes.products);
 app.get('/shopping-cart', routes.shoppingCart);
 app.post('/shopping-cart', routes.addToShoppingCart);
 app.put('/shopping-cart/update-product', routes.updateShoppingCart);
+app.put('/shopping-cart/update-multiple-products', routes.updateMultipleProducts);
 
 app.listen(port, () => {
   console.log(`XenElectric API listening at http://localhost:${port}`)
