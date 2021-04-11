@@ -1,4 +1,15 @@
 # XenElectronic
+
+## Setup
+1. Clone github repository
+2. Run command npm install for both directories (website and server)
+3. Run command npm start (applicable for both directories)
+4. Check website by accessing url: [a link](http://localhost:3000/)
+5. Check server health by accessing url:[a link](http://localhost:4000/health)
+
+### Notes
+Database is hosted by MongoDB Atlas. No need to setup
+
 ## Context
 The goal of these exercises are to assess your proficiency in software engineering that is related to the daily work that we do at Xendit. Please upload the completed assessment to github repository and share with us the link to the repository. We expect the mandatory tasks to be completed and submitted within 3 days. Please refer to the section below for the task details.
 
